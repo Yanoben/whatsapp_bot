@@ -4,7 +4,7 @@ import json
 
 def get_id_token(url, headers, payload):
     url = url + 'chat/spare?crm=TEST&domain=test'
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.get(url, headers=headers, data=payload)
     id = response.id
     token = response.token
     return id, token
@@ -13,14 +13,14 @@ def get_id_token(url, headers, payload):
 def get_status(url, headers, id, token):
     method = 'status'
     url = url + f'instance{id}/{method}?token={token}'
-    response = requests.request("GET", url, headers=headers)
+    response = requests.get(url, headers=headers)
     return response.state
 
 
 def get_name_and_number(url, headers, id, token):
     method = 'contacts'
     url = url + f'instance{id}/{method}?token={token}'
-    response = requests.request("GET", url, headers=headers)
+    response = requests.get(url, headers=headers)
     number = response.number
     name = response.name
     return number, name
@@ -34,7 +34,7 @@ def send_message(url, headers, id, token, number):
                'sendSeen': '1',
                'typeMsg': 'text',
                }
-    response = requests.request("POST", url, data=payload, headers=headers)
+    response = requests.post(url, data=payload, headers=headers)
     return response.status_code
 
 
