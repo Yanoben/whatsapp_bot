@@ -56,6 +56,8 @@ def main():
         'name': name,
         'phone': number,
         'status': status,
+        'id': id,
+        'token': token
         }
     json.dumps(data_set)
 
